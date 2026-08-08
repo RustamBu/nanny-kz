@@ -197,9 +197,11 @@ h2 {
   display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 2px; margin-top: 52px;
 }
+.services-grid .fade-up { display: flex; }
 .service-card {
   background: var(--milk-dk); padding: 36px 28px;
   position: relative; overflow: hidden; transition: background 0.3s;
+  flex: 1 1 auto; display: flex; flex-direction: column;
 }
 .service-card::after {
   content: ''; position: absolute; bottom: 0; left: 0;
@@ -219,7 +221,8 @@ h2 {
 .why .section-tag::before { background: var(--wheat); }
 .why h2 { color: var(--milk); }
 .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 52px; }
-.why-item { padding: 44px 48px; border: 1px solid rgba(216,230,208,0.1); transition: background 0.3s; }
+.why-grid .fade-up { display: flex; }
+.why-item { padding: 44px 48px; border: 1px solid rgba(216,230,208,0.1); transition: background 0.3s; flex: 1 1 auto; }
 .why-item:hover { background: rgba(216,230,208,0.05); }
 .why-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: var(--sage); opacity: 0.5; line-height: 1; margin-bottom: 10px; }
 .why-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--milk-dk); margin-bottom: 10px; }
