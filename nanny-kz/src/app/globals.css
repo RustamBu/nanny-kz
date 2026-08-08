@@ -58,6 +58,22 @@ nav a:hover::after { width: 100%; }
 .btn-nav::after { display: none !important; }
 .btn-nav:hover { background: var(--forest-md) !important; transform: translateY(-1px); }
 
+/* ── LANGUAGE SWITCH ── */
+.lang-switch {
+  display: flex; align-items: center; gap: 2px;
+  border: 1px solid var(--mint-dk); border-radius: 4px;
+  padding: 2px; margin-left: 24px; flex-shrink: 0;
+}
+.lang-btn {
+  background: none; border: none; cursor: pointer;
+  padding: 5px 9px; border-radius: 3px;
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  font-size: 11px; letter-spacing: 1px; color: var(--forest-lt);
+  transition: background 0.2s, color 0.2s;
+}
+.lang-btn:hover { color: var(--forest); }
+.lang-btn.active { background: var(--forest); color: var(--milk); }
+
 /* ── HERO ── */
 .hero {
   min-height: 100vh;
@@ -123,10 +139,13 @@ nav a:hover::after { width: 100%; }
   display: flex; gap: 40px;
   margin-top: 56px; padding-top: 40px;
   border-top: 1px solid var(--mint);
+  width: 100%; justify-content: center;
 }
+.hero-stats > div { flex: 1; min-width: 0; }
 .stat-n {
   font-family: 'Cormorant Garamond', serif;
   font-size: 40px; font-weight: 300; color: var(--forest); line-height: 1;
+  white-space: nowrap;
 }
 .stat-l { font-size: 11px; color: var(--forest-lt); margin-top: 6px; letter-spacing: 0.5px; }
 .hero-right-text { position: relative; z-index: 2; padding: 48px; }
@@ -322,11 +341,15 @@ footer { background: var(--forest); padding: 56px 8vw 28px; }
   .contact-section { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   nav { display: none; }
+  .lang-switch { margin-left: auto; }
 }
 @media (max-width: 560px) {
   .services-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; }
-  .hero-stats { gap: 20px; flex-wrap: wrap; }
+  .hero-stats { gap: 14px; flex-wrap: nowrap; }
+  .hero-stats > div { text-align: center; }
+  .stat-n { font-size: 30px; }
+  .stat-l { font-size: 10px; }
   .form-row { grid-template-columns: 1fr; }
   section { padding: 64px 6vw; }
 }

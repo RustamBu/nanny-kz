@@ -1,10 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { useLang } from '@/components/LanguageProvider'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
 export default function ContactForm() {
+  const { t } = useLang()
+  const f = t.form
   const [state, setState] = useState<FormState>('idle')
   const [errors, setErrors] = useState<Record<string, boolean>>({})
 
@@ -41,11 +44,7 @@ export default function ContactForm() {
   }
 
   if (state === 'success') {
-    return (
-      <div className="form-success">
-        ✓ Заявка отправлена. Мы позвоним вам в течение одного рабочего дня.
-      </div>
-    )
+    return <div className="form-success">{f.success}</div>
   }
 
   return (
@@ -55,7 +54,7 @@ export default function ContactForm() {
           <input
             name="name"
             type="text"
-            placeholder="Ваше имя *"
+            placeholder={f.name}
             className={errors.name ? 'error' : ''}
           />
         </div>
@@ -63,39 +62,33 @@ export default function ContactForm() {
           <input
             name="phone"
             type="tel"
-            placeholder="Номер телефона *"
+            placeholder={f.phone}
             className={errors.phone ? 'error' : ''}
           />
         </div>
       </div>
       <div className="field">
         <select name="service" className={errors.service ? 'error' : ''} defaultValue="">
-          <option value="" disabled>Кто нужен? *</option>
-          <option>Няня</option>
-          <option>Домработница</option>
-          <option>Гувернантка</option>
-          <option>Повар</option>
-          <option>Другое</option>
+          <option value="" disabled>{f.service}</option>
+          {f.serviceOptions.map((opt) => (
+            <option key={opt}>{opt}</option>
+          ))}
         </select>
       </div>
       <div className="field">
         <input
           name="message"
           type="text"
-          placeholder="Дополнительные пожелания (необязательно)"
+          placeholder={f.message}
         />
       </div>
 
-      {state === 'error' && (
-        <div className="form-error-msg">
-          Что-то пошло не так. Позвоните нам напрямую: +7 777 202 2028
-        </div>
-      )}
+      {state === 'error' && <div className="form-error-msg">{f.error}</div>}
 
       <button className="btn-submit" type="submit" disabled={state === 'loading'}>
-        {state === 'loading' ? 'Отправляем...' : 'Отправить заявку'}
+        {state === 'loading' ? f.sending : f.submit}
       </button>
-      <p className="form-note">* Обязательные поля. Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+      <p className="form-note">{f.note}</p>
     </form>
   )
 }
